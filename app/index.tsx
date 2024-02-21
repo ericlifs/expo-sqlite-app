@@ -1,10 +1,20 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Stack, Link } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function Page() {
   return (
     <View className={styles.container}>
-      <Stack.Screen options={{ title: 'Overview' }} />
+      <Stack.Screen
+        options={{
+          title: 'Products',
+          headerRight: () => (
+            <Link href="/modal">
+              <Ionicons name="add" size={24} />
+            </Link>
+          ),
+        }}
+      />
       <View className={styles.main}>
         <View>
           <Text className={styles.title}>Hello World</Text>

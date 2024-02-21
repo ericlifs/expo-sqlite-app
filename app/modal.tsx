@@ -5,10 +5,12 @@ import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tailshake from 'tailshake';
 
+import useCreateProduct from '~/queries/useCreateProduct';
 import { Product } from '~/types';
 
 const ModalScreen = () => {
   const { bottom } = useSafeAreaInsets();
+  const { createProduct } = useCreateProduct();
 
   const {
     control,
@@ -16,11 +18,18 @@ const ModalScreen = () => {
     formState: { errors, isValid },
   } = useForm<Product>({
     mode: 'all',
-    defaultValues: { quantity: 1, price: 1, category: 'Clothing' },
+    defaultValues: {
+      name: 'Nike AirForce 1',
+      description: 'Nice shoes',
+      quantity: 5,
+      price: 100,
+      category: 'Clothing',
+      image: 'https://nike.com',
+    },
   });
 
   const onFormSubmit = (payload: Product) => {
-    console.log({ payload });
+    createProduct(payload);
   };
 
   return (

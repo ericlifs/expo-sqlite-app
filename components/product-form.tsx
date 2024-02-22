@@ -143,29 +143,29 @@ export default function ProductForm({ product, onFormSubmit }: ProductFormProps)
           name="quantity"
         />
 
-        <View className="flex items-center">
-          <Image height={100} width={100} source={{ uri: image }} className="mb-5 rounded-xl" />
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                value={value}
-                className={tailshake(
-                  'bg-white p-5 border-2 rounded-full mb-5 placeholder:text-indigo-500 border-indigo-500 text-black',
-                  errors.image && 'text-red-800 border-red-800 placeholder:text-red-800'
-                )}
-                placeholder="Image"
-                onBlur={onBlur}
-                onChangeText={onChange}
-              />
-            )}
-            name="image"
-          />
+        <View className="flex flex-col w-full items-center mb-5">
+          <Image height={100} width={100} source={{ uri: image }} />
         </View>
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              value={value}
+              className={tailshake(
+                'bg-white p-5 border-2 rounded-full mb-5 placeholder:text-indigo-500 border-indigo-500 text-black',
+                errors.image && 'text-red-800 border-red-800 placeholder:text-red-800'
+              )}
+              placeholder="Image"
+              onBlur={onBlur}
+              onChangeText={onChange}
+            />
+          )}
+          name="image"
+        />
       </View>
 
       <TouchableOpacity

@@ -15,7 +15,7 @@ export default function Page() {
 
   const renderProduct = ({ item }: { item: Product }) => (
     <Link href={`/details/${item.id}`} asChild>
-      <Pressable className="bg-white rounded px-4 py-2 flex flex-row items-center">
+      <Pressable className="bg-white rounded p-4 flex flex-row items-center">
         <Image source={{ uri: item.image }} className="h-14 w-14" />
 
         <View className="flex-1 mx-5">

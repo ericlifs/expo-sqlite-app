@@ -2,7 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { Stack, Link } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
 
+import useGetAllProducts from '~/queries/useGetAllProducts';
+
 export default function Page() {
+  const { products } = useGetAllProducts();
+
+  console.log(products);
+
   return (
     <View className={styles.container}>
       <Stack.Screen

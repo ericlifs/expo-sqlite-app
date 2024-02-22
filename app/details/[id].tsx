@@ -2,16 +2,16 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 
 import ProductForm from '~/components/product-form';
-import useCreateProduct from '~/queries/useCreateProduct';
 import useProductInfo from '~/queries/useProductInfo';
+import useUpdateProduct from '~/queries/useUpdateProduct';
 import { Product } from '~/types';
 
 export default function Details() {
   const { id } = useLocalSearchParams();
   const { product, status } = useProductInfo(Number(id));
-  const { createProduct } = useCreateProduct();
+  const { updateProduct } = useUpdateProduct(Number(id));
 
-  const onFormSubmit = (payload: Product) => createProduct(payload);
+  const onFormSubmit = (payload: Product) => updateProduct(payload);
 
   if (status === 'loading' || !product) {
     return (

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 
 import useDB from '~/hooks/useDB';
 import { Product } from '~/types';
@@ -7,6 +7,7 @@ const sql = `SELECT * FROM products;`;
 
 export default function useGetAllProducts() {
   const { db } = useDB();
+  const queryClient = useQueryClient();
 
   const { status, data, refetch } = useQuery<Product[]>({
     queryKey: ['ALL_PRODUCTS'],
@@ -18,6 +19,9 @@ export default function useGetAllProducts() {
       }
 
       return [] as Product[];
+    },
+    onSuccess: (products: Product[]) => {
+      products.forEach((product) => queryClient.setQueryData(['PRODUCT', product.id], product));
     },
   });
 

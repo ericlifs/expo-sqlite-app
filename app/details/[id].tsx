@@ -1,12 +1,26 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
+
+import useProductInfo from '~/queries/useProductInfo';
 
 export default function Details() {
   const { id } = useLocalSearchParams();
+  const { product, status } = useProductInfo(Number(id));
+
+  if (status === 'loading' || !product) {
+    return (
+      <>
+        <Stack.Screen options={{ title: '' }} />
+        <View className="flex-1 justify-center items-center">
+          <ActivityIndicator />
+        </View>
+      </>
+    );
+  }
 
   return (
     <View className={styles.container}>
-      <Stack.Screen options={{ title: id.toString() }} />
+      <Stack.Screen options={{ title: product.name }} />
       <View className={styles.main}>
         <Text className={styles.title}>Details</Text>
         <Text className={styles.subtitle}>Showing details for user {id}.</Text>
